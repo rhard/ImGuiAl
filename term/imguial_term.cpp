@@ -305,6 +305,10 @@ void ImGuiAl::Log::error(char const* const format, va_list args) {
 }
 
 int ImGuiAl::Log::draw(ImVec2 const& size) {
+
+    _filter.Draw(_filterLabel, 300.0f);
+    ImGui::SameLine();
+
     int action = 0;
     
     for (unsigned i = 0; _actions != nullptr && _actions[i] != nullptr; i++) {
@@ -370,7 +374,6 @@ int ImGuiAl::Log::draw(ImVec2 const& size) {
         
         ImGui::SameLine();
         ImGui::Checkbox(_cumulativeLabel, &_cumulative);
-        _filter.Draw(_filterLabel);
     }
 
     Crt::draw(size, [this](Info const& header, char const* const line) -> bool {
